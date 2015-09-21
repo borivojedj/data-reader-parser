@@ -12,8 +12,8 @@
 
 (defn read_directory
   "function reads all files in directory"
-  [datatype]
-  (file-seq (clojure.java.io/file (str "/home/boris/data/" datatype))))
+  [dir_path datatype]
+  (file-seq (clojure.java.io/file (str dir_path datatype))))
 
 
 (defn only-files
@@ -32,17 +32,17 @@
 
 (defn read_file_lazy
   "this function reads file from provided path and inserts every row in database"
-  [path]
+  [path archive_path]
   (with-open [rdr (io/reader path)]
          (doseq [line (line-seq rdr)]
          (dbcontroller/insert_into_comm_tables (get_type_from_filename path) line "alati_metode.receive")))
-  (move_files path (str "/home/boris/data/archive/" (.getName path) "_" (format_date date))))
+  (move_files path (str archive_path (.getName path) "_" (format_date date))))
 
 
 (defn read_files
   "reads all files from directory"
-  [files]
+  [files archive_path]
   (doseq [file files]
-    (read_file_lazy file)))
+    (read_file_lazy file archive_path)))
 
 
