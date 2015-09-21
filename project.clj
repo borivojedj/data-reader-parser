@@ -5,4 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/java.jdbc "0.4.2"]
-                 [org.postgresql/postgresql "9.4-1203-jdbc42"]])
+                 [org.postgresql/postgresql "9.4-1203-jdbc41"]
+                 [me.raynes/fs "1.4.6"]]
+  :aot :all
+  :main data-reader-parser.core)
