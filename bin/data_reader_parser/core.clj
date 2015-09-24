@@ -3,7 +3,8 @@
     :methods [#^{:static true} [start [String String String] void]])
   (:require [data-reader-parser.functions :as functions])
   (:require [data-reader-parser.file_reader :as file_reader])
-  (:require [data-reader-parser.database_controller :as dbcontroller]))
+  (:require [data-reader-parser.database_controller :as dbcontroller])
+  (:require [data-reader-parser.parser :as parser]))
 
 (defn -start
   "main function to run"
@@ -13,4 +14,4 @@
 (defn -parse_data
   "function that parses data from receive table"
   [datatype]
-  ())
+  (parser/parsing datatype))
