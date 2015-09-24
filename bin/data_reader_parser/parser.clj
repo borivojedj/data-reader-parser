@@ -11,7 +11,13 @@
 
 (defn split_record
   [record]
-  (str/split record #";"))
+  (str/split record #";" -1))
+
+(defn replace_empty
+  [s]
+  (if (str/blank? s)
+    "/"
+    s))
 
 (defn product_action
   "if product exists update it, if not run insert statement"
@@ -25,16 +31,36 @@
 (defn client_action
   [record record_id]
   (do (if (empty? (dbcontroller/find_by_code "clients" "client_code" (record 0)))
-       (dbcontroller/insert_into_clients (record 0) (record 1) (record 2) (record 3))
-       (dbcontroller/update_client (record 0) (record 1) (record 2) (record 3)))
+       (dbcontroller/insert_into_clients 
+         (replace_empty(record 0)) 
+         (replace_empty(record 1)) 
+         (replace_empty(record 2)) 
+         (replace_empty(record 3))
+         (replace_empty(record 4)))
+       (dbcontroller/update_client  
+         (replace_empty(record 0)) 
+         (replace_empty(record 1)) 
+         (replace_empty(record 2)) 
+         (replace_empty(record 3))
+         (replace_empty(record 4))))
        (dbcontroller/insert_into_receive_log "CLI" record "alati_metode.receive_log")
        (dbcontroller/delete_from_receive record_id)))
 
 (defn supplier_action
   [record record_id]
   (do (if (empty? (dbcontroller/find_by_code "suppliers" "supplier_code" (record 0)))
-    (dbcontroller/insert_into_suppliers (record 0) (record 1) (record 2) (record 3))
-    (dbcontroller/update_supplier (record 0) (record 1) (record 2) (record 3)))
+    (dbcontroller/insert_into_suppliers          
+         (replace_empty(record 0)) 
+         (replace_empty(record 1)) 
+         (replace_empty(record 2)) 
+         (replace_empty(record 3))
+         (replace_empty(record 4)))
+    (dbcontroller/update_supplier 
+         (replace_empty(record 0)) 
+         (replace_empty(record 1)) 
+         (replace_empty(record 2)) 
+         (replace_empty(record 3))
+         (replace_empty(record 4))))
     (dbcontroller/insert_into_receive_log "SUP" record "alati_metode.receive_log")
     (dbcontroller/delete_from_receive record_id)))
 
@@ -45,7 +71,7 @@
     "PRO" (product_action record record_id)
     "CLI" (client_action record record_id)
     "SUP" (supplier_action record record_id)
-    (println "Nepoznat tip podatka! " datatype)))
+    (println "Unknown type of data! " datatype)))
 
 (defn read_data
   "reads every record returned from db"

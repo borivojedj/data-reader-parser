@@ -1,6 +1,8 @@
 (ns data-reader-parser.core
   (:gen-class
-    :methods [#^{:static true} [start [String String String] void]])
+    :methods [#^{:static true} 
+             [start [String String String] void]
+              [parse_data [String] void]])
   (:require [data-reader-parser.functions :as functions])
   (:require [data-reader-parser.file_reader :as file_reader])
   (:require [data-reader-parser.database_controller :as dbcontroller])
