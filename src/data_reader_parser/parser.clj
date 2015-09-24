@@ -77,7 +77,7 @@
   "reads every record returned from db"
   [maps datatype]
   (doseq [map maps]
-    (do (println "fetching row...")(parsing_data (split_record (map :rec_data)) datatype (map :rec_id)) (println "fetching other row..."))))
+    (do (println "fetching row...")(parsing_data (split_record (map :rec_data)) datatype (map :rec_id)))))
 
 (defn parsing
   "main function to call for parsing data"
