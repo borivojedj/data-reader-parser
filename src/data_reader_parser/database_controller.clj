@@ -89,3 +89,20 @@
     (sql/update! db-spec :alati_metode.suppliers 
                {:supplier_name supplier_name :supplier_phone supplier_phone :supplier_email supplier_email :supplier_address supplier_address}
                ["supplier_code=?" supplier_code])))
+
+(defn find_product_by_code
+  "finds product by product code"
+  [value]
+  (find_by_code "products" "product_code" value))
+
+(defn find_client_by_code
+  [value]
+  (find_by_code "clients" "client_code" value))
+
+(defn find_supplier_by_code
+  [value]
+  (find_by_code "suppliers" "supplier_code" value))
+
+(defn find_document_by_number
+  [datatype value]
+  (sql/query db-spec ["SELECT * FROM alati_metode.receive WHERE rec_type=? and rec_data like ?" datatype (str value "%")]))
