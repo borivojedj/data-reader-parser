@@ -4,7 +4,7 @@
 
 (def db-spec {:classname "org.postgresql.Driver"
               :subprotocol "postgresql"
-              :subname "//localhost:5432/alati_metode_db"
+              :subname "//localhost:5432/alati_metode.db"
               :user "postgres"
               :password "log"
               })
