@@ -102,7 +102,3 @@
 (defn find_supplier_by_code
   [value]
   (find_by_code "suppliers" "supplier_code" value))
-
-(defn find_document_by_number
-  [datatype value]
-  (sql/query db-spec ["SELECT * FROM alati_metode.receive WHERE rec_type=? and rec_data like ?" datatype (str value "%")]))
